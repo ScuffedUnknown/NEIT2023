@@ -25,7 +25,7 @@ var playerData ={
 		//The idle animation 
     	idle:
 		{
-			fps:15,
+			fps:10,
 			cycle:true,
 			frames:
 			[
@@ -37,7 +37,7 @@ var playerData ={
 		//The walwidth:128, height:128,
 		walk:
 		{
-			fps:1,
+			fps:3,
 			cycle:true,
 			frames:
 			[
@@ -55,7 +55,7 @@ var playerData ={
 			cycle:false,
 			frames:
 			[
-				{width:128, height:128, startX:640, startY:0}
+				{width:128, height:128, startX:1024, startY:0}
 			]
 		},
 		//The crouch animation 
@@ -65,10 +65,10 @@ var playerData ={
 			cycle:true,
 			frames:
 			[
-				{width:128, height:128, startX:768, startY:0},
-				{width:128, height:128, startX:768, startY:0},
-				{width:128, height:128, startX:768, startY:0},
-				{width:128, height:128, startX:768, startY:0},
+				{width:128, height:128, startX:896, startY:0},
+				{width:128, height:128, startX:896, startY:0},
+				{width:128, height:128, startX:896, startY:0},
+				{width:128, height:128, startX:896, startY:0},
 				{width:128, height:128, startX:896, startY:0}
 			]
 		},
@@ -80,13 +80,10 @@ var playerData ={
 			//width:300,
 			frames:
 			[
-				{width:128, height:128, startX:1024, startY:0},
-				{width:128, height:128, startX:1024, startY:0},
-				{width:128, height:128, startX:1024, startY:0},
-				{width:128, height:128, startX:1152, startY:0},
-				{width:128, height:128, startX:1152, startY:0},
-				{width:128, height:128, startX:1152, startY:0},
-				{width:128, height:128, startX:1152, startY:0}
+				{width:128, height:128, startX:1664, startY:0},
+				{width:128, height:128, startX:1664, startY:0},
+			
+
 				
 			]
 		}
