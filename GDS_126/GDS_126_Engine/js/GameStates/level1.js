@@ -164,8 +164,8 @@ gameStates[`level1`] = function()
 
 			bullets[currentBullet].vx = 5*wiz.dir;
 			bullets[currentBullet].world = level;
-			bullets[currentBullet].x = wiz.x-level.x + (wiz.dir * 96) ;
-			bullets[currentBullet].y = wiz.y + 20;
+			bullets[currentBullet].x = wiz.x-level.x + (wiz.dir * 25) ;
+			bullets[currentBullet].y = wiz.y + 10;
 			bullets[currentBullet].dir = wiz.dir;
 			
 			sounds.play(`Shoot`,0)
@@ -307,7 +307,7 @@ gameStates[`level1`] = function()
 		//if(bullets[i].overlap(stage)) bullets[i].vy+=1;
 		bullets[i].move()
 		//bullets[i].play(function(){return}).drawSprite()
-		//bullets[i].angle+=10
+		bullets[i].angle+=10
 		while(g1.collide(bullets[i].bottom) && bullets[i].vy>=0)
 		{
 			
