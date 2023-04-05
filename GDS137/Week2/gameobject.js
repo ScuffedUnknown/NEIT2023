@@ -51,10 +51,10 @@ function GameObject(x,y,w,h,color)
 			ctx.beginPath();
 			ctx.translate(this.x, this.y);
 			ctx.arc(0, 0, this.width/2, 0, 360 *Math.PI/180, true);
-			ctx.arc(0, 0, this.width/2, 0, 360 *Math.PI/180, true);
 			ctx.closePath();
 			ctx.fill();
 		ctx.restore();
+
 		
 	}	
 	

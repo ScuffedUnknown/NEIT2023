@@ -7,6 +7,7 @@ var interval = 1000/60;
 	
 	//Instantiate the Player
 	var ball = new Ball(canvas.width/2,canvas.height/2,50,"black",0,10,100)
+      
       ball.vx=15  
       ball.vy=15
 	//Set the Animation Timer
