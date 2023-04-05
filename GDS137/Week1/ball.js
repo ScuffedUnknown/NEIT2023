@@ -14,8 +14,6 @@ function Ball() {
         ctx.closePath()
         ctx.fill()
         ctx.restore()
-
-
      }
 
  //This changes the player's position
