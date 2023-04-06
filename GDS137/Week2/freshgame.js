@@ -6,7 +6,7 @@ var interval = 1000/60;
 
 	var ball = new GameObject(canvas.width/2,canvas.height/2,50,50,"black")
 
-	var player1 = new GameObject(0,canvas.height/2,50,150,'Purple')
+	var paddle = new GameObject(0,canvas.height/2,50,150,'Purple')
 
     //Define Booleans for each key
 var w = false;
@@ -46,8 +46,8 @@ function release(e)
 		s = false;
 	}
 }
-ball.vx = 5
-ball.vy = 5
+ball.vx = -10
+ball.vy = 0
 
 function animate()
 {
@@ -73,29 +73,39 @@ function animate()
         ball.vy = -ball.vy
 
     }
-	if(ball.hitTestObject(player1))
+	if(ball.hitTestObject(paddle))
 	{
-		ball.vx = -ball.vx
+		if(ball.y < paddle.y - paddle.height/6){
+			ball.vx = 5
+			ball.vy = -5
+		}
+		if(ball.y < paddle.y + paddle.height/6){
+			ball.vx = 5
+		}
+		if(ball.y > paddle.y + paddle.height/6){
+			ball.vx = 5
+			ball.vy = 5
+		}
 	}
 	if(w)
 	{
 
-		player1.y += -5;
+		paddle.y += -5;
 	}
 	if(s)
 	{
 
-		player1.y += 5;
+		paddle.y += 5;
 	}
-    if(player1.y > canvas.height - player1.height/2){
-        player1.y =canvas.height - player1.height/2
+    if(paddle.y > canvas.height - paddle.height/2){
+        paddle.y =canvas.height - paddle.height/2
 
     }
-  if(player1.y < player1.height/2){
-        player1.y =player1.height/2
+  if(paddle.y < paddle.height/2){
+        paddle.y =paddle.height/2
     }
     ball.drawCircle()
-    player1.drawRect()
+    paddle.drawRect()
 
 }
 function randomRange(high, low){
