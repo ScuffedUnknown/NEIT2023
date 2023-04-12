@@ -6,12 +6,17 @@ var interval = 1000/60;
 
 	var ball = new GameObject(canvas.width/2,canvas.height/2,50,50,"black")
 
-	var paddle = new GameObject(0,canvas.height/2,50,150,'Purple')
+	var paddle = new GameObject(0,canvas.height/2,25,150,'Purple')
+	var paddle2 = new GameObject(1025,canvas.height/2,25,150,'Purple')
 
+	var img=document.getElementById("ric");
     //Define Booleans for each key
 var w = false;
 var s = false;
-
+var up = false;
+var down = false
+var p1Wins = 0
+var p2Wins = 0
 //Add Event Listeners
 document.addEventListener("keydown", press);
 document.addEventListener("keyup", release);
@@ -30,13 +35,22 @@ function press(e)
 	{
 		s = true;
 	}
+	
+	if(e.keyCode == 38)
+	{
+		up = true;
+	}
+	if(e.keyCode == 40)
+	{
+		down = true;
+	}
+	
 }
 
 function release(e)
 {
 	//---This logs key codes into the browser's console.
 	//console.log("Released" + e.keyCode);
-	
 	if(e.keyCode == 87)
 	{
 		w = false;
@@ -44,6 +58,15 @@ function release(e)
 	if(e.keyCode == 83)
 	{
 		s = false;
+	}
+	
+	if(e.keyCode == 38)
+	{
+		up = false;
+	}
+	if(e.keyCode == 40)
+	{
+		down = false;
 	}
 }
 ball.vx = -10
@@ -53,14 +76,19 @@ function animate()
 {
 	//Erase the Screen
 	ctx.clearRect(0,0,canvas.width, canvas.height);	
-    ball.move()
+	ctx.drawImage(img,canvas.width/2-13.4,canvas.height/2-50,50,50)
+    //ball.move()
     if(ball.x > canvas.width - ball.width/2){
-        ball.x = canvas.width - ball.width/2
-        ball.vx = -ball.vx
+		ball.x = canvas.width/2
+		ball.y = canvas.height/2
+		p1Wins++;
+		console.log(p1Wins)	
   }
   if(ball.x < ball.width/2){
 	ball.x = canvas.width/2
 	ball.y = canvas.height/2	
+	p2Wins++
+	console.log(p2Wins)	
 
   }
   if(ball.y > canvas.height - ball.height/2){
@@ -76,16 +104,31 @@ function animate()
 	if(ball.hitTestObject(paddle))
 	{
 		if(ball.y < paddle.y - paddle.height/6){
-			ball.vx = 5
-			ball.vy = -5
+			ball.vx = 10
+			ball.vy = -10
 		}
 		if(ball.y < paddle.y + paddle.height/6){
-			ball.vx = 5
+			ball.vx = 10
 		}
 		if(ball.y > paddle.y + paddle.height/6){
-			ball.vx = 5
-			ball.vy = 5
+			ball.vx = 10
+			ball.vy = 10
 		}
+	}
+	if(ball.hitTestObject(paddle2))
+	{
+		if(ball.y < paddle2.y - paddle2.height/6){
+			ball.vx = -10
+			ball.vy = 10
+		}
+		if(ball.y < paddle2.y + paddle2.height/6){
+			ball.vx = -10
+		}
+		if(ball.y > paddle2.y + paddle2.height/6){
+			ball.vx = -10
+			ball.vy = -10
+		}
+		
 	}
 	if(w)
 	{
@@ -97,6 +140,16 @@ function animate()
 
 		paddle.y += 5;
 	}
+	if(up)
+	{
+
+		paddle2.y += -5;
+	}
+	if(down)
+	{
+
+		paddle2.y += 5;
+	}
     if(paddle.y > canvas.height - paddle.height/2){
         paddle.y =canvas.height - paddle.height/2
 
@@ -104,8 +157,34 @@ function animate()
   if(paddle.y < paddle.height/2){
         paddle.y =paddle.height/2
     }
+    if(paddle2.y > canvas.height - paddle2.height/2){
+        paddle2.y =canvas.height - paddle2.height/2
+
+    }
+  if(paddle2.y < paddle2.height/2){
+        paddle2.y =paddle2.height/2
+    }
     ball.drawCircle()
     paddle.drawRect()
+    paddle2.drawRect()
+
+	ctx.save()
+	ctx.strokeStyle = 'yellow'
+	ctx.beginPath()
+	ctx.moveTo(canvas.width/2,0)
+	ctx.lineTo(canvas.width/2,canvas.height)
+	ctx.closePath()
+	ctx.lineWidth = 2	
+	ctx.stroke()
+	ctx.restore()
+
+	ctx.save()
+    ctx.font = "30px Roboto Mono"
+    ctx.fillStyle = "black"
+    ctx.fillText("Player 1 | Player 2", canvas.width/2-110, 35)
+	ctx.font = "15px Roboto Mono"
+	ctx.fillText(p1Wins + " - "+ p2Wins, canvas.width/2 -13.4, 70)
+    ctx.restore()
 
 }
 function randomRange(high, low){
