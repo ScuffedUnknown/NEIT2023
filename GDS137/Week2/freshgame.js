@@ -4,7 +4,7 @@ var interval = 1000/60;
 	//Set the Animation Timer
 	timer = setInterval(animate, interval);
 
-	var ball = new GameObject(canvas.width/2,canvas.height/2,50,50,"black")
+	var ball = new GameObject(canvas.width/2,canvas.height/2,35,35,"black")
 
 	var paddle = new GameObject(0,canvas.height/2,25,150,'Purple')
 	var paddle2 = new GameObject(1025,canvas.height/2,25,150,'Purple')
@@ -75,9 +75,8 @@ ball.vy = 0
 function animate()
 {
 	//Erase the Screen
-	ctx.clearRect(0,0,canvas.width, canvas.height);	
-	ctx.drawImage(img,canvas.width/2-13.4,canvas.height/2-50,50,50)
-    //ball.move()
+	ctx.clearRect(0,0,canvas.width, canvas.height)
+    ball.move()
     if(ball.x > canvas.width - ball.width/2){
 		ball.x = canvas.width/2
 		ball.y = canvas.height/2
@@ -164,10 +163,9 @@ function animate()
   if(paddle2.y < paddle2.height/2){
         paddle2.y =paddle2.height/2
     }
-    ball.drawCircle()
+    // ball.drawCircle()
     paddle.drawRect()
     paddle2.drawRect()
-
 	ctx.save()
 	ctx.strokeStyle = 'yellow'
 	ctx.beginPath()
@@ -185,7 +183,7 @@ function animate()
 	ctx.font = "15px Roboto Mono"
 	ctx.fillText(p1Wins + " - "+ p2Wins, canvas.width/2 -13.4, 70)
     ctx.restore()
-
+	ctx.drawImage(img,ball.x-ball.width/2,ball.y-ball.height/2,ball.width,ball.height)
 }
 function randomRange(high, low){
     return Math.random() * (high-low) + low
