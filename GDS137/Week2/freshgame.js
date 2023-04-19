@@ -166,15 +166,7 @@ function animate()
     // ball.drawCircle()
     paddle.drawRect()
     paddle2.drawRect()
-	ctx.save()
-	ctx.strokeStyle = 'yellow'
-	ctx.beginPath()
-	ctx.moveTo(canvas.width/2,0)
-	ctx.lineTo(canvas.width/2,canvas.height)
-	ctx.closePath()
-	ctx.lineWidth = 2	
-	ctx.stroke()
-	ctx.restore()
+
 
 	ctx.save()
     ctx.font = "30px Roboto Mono"
