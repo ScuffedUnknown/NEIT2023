@@ -4,13 +4,17 @@ var interval = 1000/60;
 	//Set the Animation Timer
 	timer = setInterval(animate, interval);
 
-	var ball = new GameObject(canvas.width/2,canvas.height/2,35,35,"#ff00ff")
+	var ball = new GameObject()
+	ball.y =canvas.width/2
+	ball.y =canvas.height/2,
+	ball.width = 80
+	ball.color = "#ff00ff"
 
 	var paddle = new GameObject(canvas.width/2,canvas.height-50,250,40,'#00ffff')
 
 	var score = 0
 	ball.force = 2;
-	paddle.force =2
+	paddle.force = 2
 	paddle.ax =1
 	var frictionX = .85;	
 	var frictionY = .97;
@@ -75,7 +79,7 @@ function release(e)
 	}
 }
 ball.vx = 5
-ball.vy = -10
+ball.vy = 0
 
 function animate()
 {
@@ -93,17 +97,25 @@ function animate()
 
 
   }
-  if(ball.y > canvas.height + ball.height/2){
-		ball.y =canvas.height - ball.height/2
-		ball.vy = ball.vy*.67
-		score = 0
-    }
+  if(ball.y > canvas.height - ball.height/2){
+	ball.y  =canvas.height -40
+	ball.vy = -ball.vy * .67
+	score = 0
+
+}
+
   if(ball.y < ball.height/2){
         ball.y =ball.height/2
         ball.vy = -ball.vy
 		
 
     }
+	ball.vy += gravity;
+	ball.vy *= frictionY 
+	ball.y += ball.vy;
+
+
+	ball.x += ball.vx;
 	if(ball.hitTestObject(paddle))
 	{
 		ball.y = ball.y-paddle.height
@@ -111,22 +123,24 @@ function animate()
 		ball.vy = -35
 		score++
 		if(ball.x < paddle.x - paddle.width/3){
-			ball.vx = ball.force*5
-			console.log("Hit far left")
+			ball.vx = -ball.force*5
+			
 
 			
 		}else if(ball.x > paddle.x- paddle.width/3 && ball.x <paddle.x-paddle.width/6){
-			console.log("hit middle left")
+		
+			ball.vx = -ball.force
 		}
 		else if(ball.x < paddle.x+ paddle.width/3 && ball.x > paddle.x+paddle.width/6){
-			console.log("hit middle right")
+			
+			ball.vx = ball.force
 		}
 		else if(ball.x > paddle.x + paddle.width/3){
 			ball.vx = ball.force*5
-			console.log("Hit far right")
+			
 
 			}else{
-				console.log("middle")	
+				
 			}
 	}
 	
@@ -138,18 +152,20 @@ function animate()
 	{
 		paddle.vx += paddle.ax * -paddle.force;
 	}
-	ball.vy += gravity;
 	paddle.vx *= frictionX;
 	paddle.x += paddle.vx;
 	paddle.y += paddle.vy;
-	ball.x += ball.vx;
-	ball.y += ball .vy;
+	console.log(paddle.x)
+
     if(paddle.x > canvas.width - paddle.width/2){
         paddle.x =canvas.width - paddle.width/2
+		paddle.vx = 0
 
     }
   if(paddle.x < paddle.width/2){
         paddle.x =paddle.width/2
+		paddle.vx = 0
+
     }
 
     ball.drawCircle()

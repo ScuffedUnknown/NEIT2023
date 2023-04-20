@@ -29,7 +29,8 @@ function GameObject(x,y,w,h,color)
 	
 	//player's velocity or speed on each axis
 	
-	
+	this.force = 1
+
 	this.ax = 1;
 	this.ay = 1;
 	
@@ -55,7 +56,7 @@ function GameObject(x,y,w,h,color)
 			ctx.fillStyle = this.color;
 			ctx.beginPath();
 			ctx.translate(this.x, this.y);
-			ctx.arc(0, 0, 40, 0, 360 *Math.PI/180, true);
+			ctx.arc(0, 0, this.width/2, 0, 360 *Math.PI/180, true);
 			ctx.closePath();
 			ctx.fill();
 		ctx.restore();
