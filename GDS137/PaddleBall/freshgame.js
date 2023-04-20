@@ -8,6 +8,7 @@ var interval = 1000/60;
 	ball.y =canvas.width/2
 	ball.y =canvas.height/2,
 	ball.width = 80
+	ball.height = 80
 	ball.color = "#ff00ff"
 
 	var paddle = new GameObject(canvas.width/2,canvas.height-50,250,40,'#00ffff')
@@ -17,7 +18,7 @@ var interval = 1000/60;
 	paddle.force = 2
 	paddle.ax =1
 	var frictionX = .85;	
-	var frictionY = .97;
+	var frictionY = .96;
 	var gravity = 1;
     //Define Booleans for each key
 var a = false;
@@ -98,7 +99,7 @@ function animate()
 
   }
   if(ball.y > canvas.height - ball.height/2){
-	ball.y  =canvas.height -40
+	ball.y  = canvas.height - ball.height/2
 	ball.vy = -ball.vy * .67
 	score = 0
 
@@ -110,8 +111,9 @@ function animate()
 		
 
     }
-	ball.vy += gravity;
 	ball.vy *= frictionY 
+	ball.vy += gravity;
+
 	ball.y += ball.vy;
 
 
@@ -119,7 +121,6 @@ function animate()
 	if(ball.hitTestObject(paddle))
 	{
 		ball.y = ball.y-paddle.height
-		ball.vy=-ball.vy
 		ball.vy = -35
 		score++
 		if(ball.x < paddle.x - paddle.width/3){
@@ -155,7 +156,7 @@ function animate()
 	paddle.vx *= frictionX;
 	paddle.x += paddle.vx;
 	paddle.y += paddle.vy;
-	console.log(paddle.x)
+
 
     if(paddle.x > canvas.width - paddle.width/2){
         paddle.x =canvas.width - paddle.width/2
