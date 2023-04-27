@@ -5,8 +5,8 @@ var context;
 var timer;
 var interval;
 var player;
-
-
+var putimer = 300
+var tTimer = 0
 	canvas = document.getElementById("canvas");
 	context = canvas.getContext("2d");	
 
@@ -108,11 +108,11 @@ function animate()
 		if(!powerUp){
 			context.font = "16px Arial black"
 			context.fillStyle = "#555555"
-			context.fillText("You Lose", canvas.width/2,
-			canvas.height/2)
+			context.fillText("You Lose", canvas.width/2,canvas.height/2)
 		}else{
 			player.x = oldX;
 			player.y = oldY
+			tTimer = 25
 			powerUp = false;
 		}
 
@@ -149,20 +149,30 @@ function animate()
 		player.vx = 0;
 
 	}
-
-	
-
+	if(putimer > 0){
+		if(powerUp){
+			player.drawDebug();
+		putimer --
+	}
+}
+	if (tTimer > 0){
+		tTimer--;
+		context.font = "16px Arial black"
+		context.fillStyle = "#555555"
+		context.fillText("Saved!", player.x + player.width/2,player.y-player.height/2)
+	}
 	if(player.hitTestObject(goal))
 	{
 		goal.y = 10000;
 		powerUp = true;
 		oldX = player.x
 		oldY = player.y
+		putimer = 300
 	}
 	
 
 
-
+console.log(putimer)
 	
 
 	
@@ -176,7 +186,7 @@ function animate()
 	player.drawRect();
 	
 	//Show hit points
-	player.drawDebug();
+
 	goal.drawCircle();
 }
 
